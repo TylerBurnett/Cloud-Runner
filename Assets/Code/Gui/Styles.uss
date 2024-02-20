@@ -1,0 +1,31 @@
+:root {
+    --color-transparent: rgba(0, 0, 0, 0);
+
+    --color-primary: rgb(255, 255, 255);
+    --color-secondary: rgb(120, 120, 120);
+    --color-Secondary-light: rgb(197, 197, 197);
+    --color-secondary-lighter: rgb(217, 217, 217);
+    --color-warning: rgb(255, 166, 128);
+
+    --border-radius: 5px;
+    --border-width: 1px;
+
+    --font-primary: url('project://database/Assets/Assets/UI/Fonts/Disket-Mono-Bold.ttf?fileID=12800000&guid=76044f9c58602ec42943ea665e82f88b&type=3#Disket-Mono-Bold');
+}
+
+Button {
+    transition: all 0.15s ease;
+
+    -unity-font-definition: var(--font-primary);
+    color: var(--color-primary);
+
+    background-color: var(--color-transparent);
+
+    border-width: var(--border-width);
+    border-color: var(--color-primary);
+    border-radius: var(--border-radius);
+}
+
+Button:hover {
+    background-color: var(--color-secondary);
+}
