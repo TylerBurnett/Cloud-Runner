@@ -1,3 +1,4 @@
+using Game.Global;
 using UnityEngine.UIElements;
 
 namespace Game.Gui

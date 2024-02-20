@@ -29,7 +29,7 @@ namespace Game.Terrain.Mutators.Initializers
 
                 if (voxel != null && voxel.GetComponent<StaticDeathObject>() == null)
                 {
-                    _ = voxel.AddComponent<StaticDeathObject>();
+                    voxel.AddComponent<StaticDeathObject>();
                 }
             }
         }
