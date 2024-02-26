@@ -11,7 +11,7 @@ namespace Game.InteractiveObjects
         protected void Awake()
         {            _ = gameObject.AddComponent<Rigidbody>();
 
-            Material deathObjectMat = Resources.Load("DeathObject", typeof(Material)) as Material;
+            Material deathObjectMat = Resources.Load("Materials/DeathObject", typeof(Material)) as Material;
             gameObject.GetComponent<Renderer>().material = deathObjectMat;
         }
 

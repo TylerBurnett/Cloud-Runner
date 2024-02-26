@@ -36,6 +36,7 @@ namespace Game.Player
             _lastPosition = gameObject.transform.position;
 
             LockPlayer();
+            UnlockCursor();
 
             EventService<GameEnterEvent>.Register(UnlockPlayer);
             EventService<RespawnPlayerEvent>.Register(Respawn);

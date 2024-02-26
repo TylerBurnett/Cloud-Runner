@@ -47,7 +47,7 @@ namespace Game.Gameplay
             EventService<PlayerMoveEvent>.Register(OnPlayerMoved);
             EventService<DeathObjectCollisionEvent>.Register(OnDeathObjectCollision);
 
-            EventService<MainMenuScreen.StartButtonPressedEvent>.Register(() => EventService<GameEnterEvent>.Trigger());
+            EventService<MainMenuScreen.StartButtonPressedEvent>.Register(OnGameEnter);
         }
 
         protected void Update()
@@ -68,6 +68,13 @@ namespace Game.Gameplay
         {
             _deathWall.transform.position = _respawn.transform.position;
             _deathWall.SetActive(false);
+        }
+
+        private void OnGameEnter()
+        {
+            EventService<GuiScreen.ShowScreenEvent>.Trigger("Game Hud");
+            EventService<GuiScreen.HideScreenEvent>.Trigger("Main Menu");
+            EventService<GameEnterEvent>.Trigger();
         }
 
         private void OnPlayerMoved(Vector3 position)

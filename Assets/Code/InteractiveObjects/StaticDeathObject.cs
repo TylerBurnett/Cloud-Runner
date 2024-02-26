@@ -15,7 +15,7 @@ namespace Game.InteractiveObjects
             rigidBody.useGravity = false;
             rigidBody.freezeRotation = false;
 
-            Material deathObjectMat = Resources.Load("DeathObject", typeof(Material)) as Material;
+            Material deathObjectMat = Resources.Load("Materials/DeathObject", typeof(Material)) as Material;
             gameObject.GetComponent<Renderer>().material = deathObjectMat;
         }
 

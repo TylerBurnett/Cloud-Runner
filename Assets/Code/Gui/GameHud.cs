@@ -12,14 +12,14 @@ namespace Game.Gui
 
         private VisualElement _meteorIndicator;
 
-        private readonly Label _distanceLabel;
+        private Label _distanceLabel;
 
         protected override ScreenArguements SetIntialArgs()
         {
             return new()
             {
                 ScreenName = "Game Hud",
-                InitialGameScreen = true,
+                InitialGameScreen = false,
             };
         }
 
@@ -30,6 +30,7 @@ namespace Game.Gui
             EventService<PlayerMoveEvent>.Register(OnPlayerMoved);
 
             _meteorIndicator = document.rootVisualElement.Q<VisualElement>("MeteorIndicator");
+            _distanceLabel = document.rootVisualElement.Q<Label>("DistanceLabel");
 
             EventService<MeteorIndicatorEvent>.Register((bool visible) => _meteorIndicator.visible = visible);
         }

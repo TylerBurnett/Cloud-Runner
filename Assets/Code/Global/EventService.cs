@@ -13,7 +13,7 @@ namespace Game.Global
     {
         // Internal testing hook for monitoring game events
         private static readonly bool _debug = true;
-        private static readonly string[] _debugEventFilter = new string[] { "GameplayEndEvent", "GameplayStartEvent", "DeathObjectCollisionEvent" };
+        private static readonly string[] _debugEventFilter = new string[] { "GameEnterEvent", "GameplayEndEvent", "GameplayStartEvent", "DeathObjectCollisionEvent" };
 
         private static T _handle;
 
