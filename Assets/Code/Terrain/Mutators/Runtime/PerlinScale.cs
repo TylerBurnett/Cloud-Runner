@@ -33,12 +33,13 @@ namespace Game.Terrain.Mutators.Runtime
             {
                 for (int z = 0; z < lengthZ; z++)
                 {
-                    GameObject voxel = descendants[x, 0, z];
-                    if (voxel != null)
+                    Transform voxelTransform = descendants[x, 0, z]?.transform;
+                    if (voxelTransform != null)
                     {
-                        Vector3 voxelScale = descendants[x, 0, z].transform.transform.localScale;
+                        Vector3 voxelScale = voxelTransform.localScale;
                         voxelScale.y = Mathf.Max(Mathf.PerlinNoise((x + seed) / _resolution, (z + seed) / _resolution) * _scale, 0);
-                        descendants[x, 0, z].transform.localScale = voxelScale;
+
+                        voxelTransform.localScale = voxelScale;
                     }
                 }
             }

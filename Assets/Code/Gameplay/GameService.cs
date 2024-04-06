@@ -19,10 +19,19 @@ namespace Game.Gameplay
     /// </summary>
     public delegate void GameplayStartEvent();
 
+    /// <summary>
+    /// The GameplayPauseEvent stops most service execution and sets timescale to 0
+    /// </summary>
     public delegate void GameplayPauseEvent();
 
+    /// <summary>
+    /// The GameplayPauseEvent restarts most service execution and sets timescale to 1
+    /// </summary>
     public delegate void GameplayResumeEvent();
 
+    /// <summary>
+    /// The GameplayEndEvent resets all services to their intial starting state  
+    /// </summary>
     public delegate void GameplayEndEvent();
 
     /// <summary>
@@ -48,6 +57,7 @@ namespace Game.Gameplay
             EventService<DeathObjectCollisionEvent>.Register(OnDeathObjectCollision);
 
             EventService<MainMenuScreen.StartButtonPressedEvent>.Register(OnGameEnter);
+            EventService<DeathMenuScreeen.FinishButtonPressedEvent>.Register(OnGameReset);
         }
 
         protected void Update()
@@ -62,6 +72,7 @@ namespace Game.Gameplay
         {
             _wallSpeed = Settings.DeathWallInitialSpeed;
             _deathWall.SetActive(true);
+            EventService<GuiScreen.ShowScreenEvent>.Trigger("Game Hud");
         }
 
         protected override void OnGameplayEnd()
@@ -72,9 +83,17 @@ namespace Game.Gameplay
 
         private void OnGameEnter()
         {
-            EventService<GuiScreen.ShowScreenEvent>.Trigger("Game Hud");
             EventService<GuiScreen.HideScreenEvent>.Trigger("Main Menu");
             EventService<GameEnterEvent>.Trigger();
+        }
+
+        private void OnGameReset()
+        {
+            EventService<GuiScreen.HideScreenEvent>.Trigger("Death Menu");
+            EventService<GuiScreen.ShowScreenEvent>.Trigger("Main Menu");
+            EventService<GameplayEndEvent>.Trigger();
+
+            Time.timeScale = 1;
         }
 
         private void OnPlayerMoved(Vector3 position)

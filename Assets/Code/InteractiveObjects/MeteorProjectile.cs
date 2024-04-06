@@ -53,7 +53,7 @@ namespace Game.InteractiveObjects
             {
                 GameObject chunk = GameObject.CreatePrimitive(PrimitiveType.Cube);
 
-                _ = chunk.AddComponent<DeathObject>();
+                chunk.AddComponent<DeathObject>();
                 Rigidbody rigidbody = chunk.GetComponent<Rigidbody>();
 
                 float projectileSize = Random.Range(DebrisSizeMin, DebrisSizeMax);
@@ -70,8 +70,8 @@ namespace Game.InteractiveObjects
                 debris.Add(rigidbody);
             }
 
-            yield return WaitFor.Frames(4); // This is required because the phyisics system hasn't registered the change in location yet,
-                                            // by waiting a whole 2 frames we are allowing time for it to register the change before trying to calc the explosion
+            yield return Enumerators.WaitForFrames(4); // This is required because the phyisics system hasn't registered the change in location yet,
+                                                       // by waiting a whole 2 frames we are allowing time for it to register the change before trying to calc the explosion
 
             foreach (Rigidbody rigidbody in debris)
             {

@@ -65,7 +65,7 @@ namespace Game.GameplayEvents
             projectile.transform.position = spawn;
             projectile.transform.localScale = new Vector3(ProjectileSize, ProjectileSize, ProjectileSize);
 
-            _ = projectile.AddComponent<MeteorProjectile>();
+            projectile.AddComponent<MeteorProjectile>();
 
             Vector3 appliedForce = (target - projectile.transform.position) * ProjectileVelocity;
 

@@ -36,6 +36,7 @@ namespace Game.Common
         private void HandleEnd()
         {
             _isPlaying = false;
+            IsPaused = false;
             OnGameplayEnd();
         }
 

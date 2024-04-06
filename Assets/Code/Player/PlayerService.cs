@@ -4,7 +4,6 @@ using Game.Gameplay;
 using Game.Global;
 using StarterAssets;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Game.Player
 {
@@ -21,8 +20,10 @@ namespace Game.Player
         public float MinFov = 80;
 
         private GameObject _camera;
-        private GameObject _respawn;
+        private Transform _respawnTransform;
 
+        private FirstPersonController _firstPersonController;
+        private CharacterController _characterController;
         private StarterAssetsInputs _input;
 
         private Vector3 _lastPosition;
@@ -30,16 +31,19 @@ namespace Game.Player
         protected void Start()
         {
             _camera = GameObject.FindGameObjectWithTag("PlayerCamera");
-            _respawn = GameObject.FindGameObjectWithTag("Respawn_Player");
+            _respawnTransform = GameObject.FindGameObjectWithTag("Respawn_Player").transform;
 
+            _firstPersonController = GetComponent<FirstPersonController>();
+            _characterController = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
+
             _lastPosition = gameObject.transform.position;
 
             LockPlayer();
             UnlockCursor();
 
             EventService<GameEnterEvent>.Register(UnlockPlayer);
-            EventService<RespawnPlayerEvent>.Register(Respawn);
+            EventService<RespawnPlayerEvent>.Register(() => Respawn());
 
             EventService<GetPlayerPositionEvent>.Register(() => gameObject.transform.position);
         }
@@ -61,7 +65,7 @@ namespace Game.Player
 
         protected override void OnGameplayEnd()
         {
-            Respawn();
+            Respawn(true);
         }
 
         protected override void OnGameplayPause()
@@ -82,31 +86,30 @@ namespace Game.Player
             virtualCamera.m_Lens.FieldOfView = Mathf.Lerp(virtualCamera.m_Lens.FieldOfView, fovTarget, Time.deltaTime * 5);
         }
 
-        private void Respawn()
+        private void Respawn(bool locked = false)
         {
             LockPlayer();
 
-            gameObject.transform.position = _respawn.transform.position;
-
-            UnlockPlayer();
+            gameObject.transform.SetPositionAndRotation(_respawnTransform.position, _respawnTransform.rotation);
+            if (!locked) UnlockPlayer();
         }
 
         private void UnlockPlayer()
         {
-            GetComponent<CharacterController>().enabled = true;
-            GetComponent<FirstPersonController>().enabled = true;
-            GetComponent<PlayerInput>().enabled = true;
+            _characterController.enabled = true;
+            _firstPersonController.enabled = true;
+            _input.enabled = true;
 
-            UnlockCursor();
+            LockCursor();
         }
 
         private void LockPlayer()
         {
-            GetComponent<CharacterController>().enabled = false;
-            GetComponent<FirstPersonController>().enabled = false;
-            GetComponent<PlayerInput>().enabled = false;
+            _characterController.enabled = false;
+            _firstPersonController.enabled = false;
+            _input.enabled = false;
 
-            LockCursor();
+            UnlockCursor();
         }
 
         private static void LockCursor()
