@@ -93,7 +93,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 3ce9c48a2627f564fa8d87cc8ff1822e, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -474,7 +474,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CullingDistance: 150
   Settings:
-    VoxelMaterial: {fileID: 2100000, guid: c505d6f376d164044b7eecfbea9dfe2b, type: 2}
+    VoxelMaterial: {fileID: 2100000, guid: 359cfef36fbfd9b4cb5a3de12f45a7d9, type: 2}
     MapChunkSettings:
       GridSize: 15
       ChunkSize: {x: 20, y: 1, z: 50}
@@ -3326,6 +3326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ad6af9820625504eb2c3138fb663446, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BackgroundColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1870924871 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9005220659476430823, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}

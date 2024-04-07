@@ -17,16 +17,17 @@ namespace Game.Terrain
         public GameObject Parent { get; internal set; }
 
         private readonly int _gridSize;
-
+        private readonly Material _material;
         private GameObject[,,] _descendants;
 
         private readonly MutatorFactory _runtimeMutator;
 
-        public Chunk(Vector3 location, Vector3 size, int gridSize, float seed, MutatorCollection mutators)
+        public Chunk(Vector3 location, Vector3 size, int gridSize, float seed,Material material, MutatorCollection mutators)
         {
             Size = size;
             Location = location;
             _gridSize = gridSize;
+            _material = material;
             _runtimeMutator = mutators.RuntimeMutator;
 
             // Establish the chunk
@@ -92,6 +93,8 @@ namespace Game.Terrain
             GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
             cube.transform.position = location;
             cube.transform.localScale = new Vector3(_gridSize, _gridSize, _gridSize);
+
+            cube.GetComponent<Renderer>().material = _material;
 
             return cube;
         }

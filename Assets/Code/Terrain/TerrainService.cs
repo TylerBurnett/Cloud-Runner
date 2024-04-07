@@ -136,7 +136,7 @@ namespace Game.Terrain
                 }
 
                 MutatorCollection mutators = MutatorGenerator.Generate();
-                Chunks.Add(new Chunk(chunkLocation, Settings.MapChunkSettings.ChunkSize, Settings.MapChunkSettings.GridSize, _seed, mutators));
+                Chunks.Add(new Chunk(chunkLocation, Settings.MapChunkSettings.ChunkSize, Settings.MapChunkSettings.GridSize, _seed, Settings.VoxelMaterial, mutators));
             }
         }
 
