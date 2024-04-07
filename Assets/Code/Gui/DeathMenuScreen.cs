@@ -17,7 +17,7 @@ namespace Game.Gui
 
         private Label _distanceLabel;
 
-        private readonly string _distanceLabelText;
+        private string _distanceLabelText;
 
         protected override ScreenArguements SetIntialArgs()
         {
@@ -35,6 +35,8 @@ namespace Game.Gui
             document.rootVisualElement.Q<Button>("FinishGameButton").clicked += OnFinishButtonPressed;
 
             _distanceLabel = document.rootVisualElement.Q<Label>("DistanceLabel");
+
+            _distanceLabelText = _distanceLabel.text;
         }
 
         protected override void OnScreenShown()
